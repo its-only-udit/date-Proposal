@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Go On A Date With Me?</title>
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top Badge -->
+  <div class="top-badge">
+    <span>♥</span> BUILT WITH LOVE <span>♥</span>
+  </div>
+
+  <!-- Main Container -->
+  <div class="card">
+
+    <!-- STEP 0: Proposal -->
+    <div id="step-0">
+      <div class="step-tag">A SMALL QUESTION</div>
+      <h1>Will you go on a date with me?</h1>
+      <p class="subtitle">Take your time. There is really only one right answer here.</p>
+
+      <!-- Animated Cat Meme with downside text badge -->
+      <div class="meme-container">
+        <img
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1c3g2dGJ3eDRvaWsydWhmbnBqNmI4eWV6aWJuczhreHFzaWNqdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CjmvTCZf2U3p09Cn0h/giphy.gif"
+          alt="Cat waiting" class="cat-img">
+        <div class="meme-badge">ME WAITING FOR YOU TO PRESS YES</div>
+      </div>
+
+      <div class="btn-group-step0" id="btn-group">
+        <button class="btn-yes" onclick="goToStep(1)">
+          <span>♥</span> Yes, I'd love to
+        </button>
+        <button class="btn-no" id="no-btn" onmouseover="evadeNoButton()" onclick="evadeNoButton()">Nope</button>
+      </div>
+    </div>
+
+    <!-- STEP 1: Date & Time -->
+    <div id="step-1" class="hidden">
+      <div class="step-tag">STEP 1 OF 2</div>
+      <div class="icon-badge">📅</div>
+      <h1>When works for you?</h1>
+      <p class="subtitle">Pick a date and time — I'll make it special.</p>
+
+      <form onsubmit="event.preventDefault(); goToStep(2);">
+        <div class="form-group">
+          <label class="form-label">DATE</label>
+          <input type="date" class="form-input" id="input-date" value="2026-07-29" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">TIME</label>
+          <select class="form-select" id="input-time">
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="12:00 PM">12:00 PM</option>
+            <option value="1:00 PM">1:00 PM</option>
+            <option value="2:00 PM" selected>2:00 PM</option>
+            <option value="3:00 PM">3:00 PM</option>
+            <option value="5:00 PM">5:00 PM</option>
+            <option value="6:00 PM">6:00 PM</option>
+            <option value="7:00 PM">7:00 PM</option>
+            <option value="8:00 PM">8:00 PM</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">THE PLAN</label>
+          <select class="form-select" id="input-plan">
+            <option value="Arcade Night">Arcade Night</option>
+            <option value="Cozy Coffee">Cozy Coffee</option>
+            <option value="Sunset Walk">Sunset Walk</option>
+            <option value="Dinner & a Movie" selected>Dinner & a Movie</option>
+            <option value="Mini Golf">Mini Golf</option>
+            <option value="Bookstore Wander">Bookstore Wander</option>
+            <option value="Surprise Me ✨">Surprise Me ✨</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">
+          Next: the food &rarr;
+        </button>
+      </form>
+    </div>
+
+    <!-- STEP 2: Food Selection -->
+    <div id="step-2" class="hidden">
+      <div class="step-tag">STEP 2 OF 2</div>
+      <div class="icon-badge">✂️</div>
+      <h1>What should we eat?</h1>
+      <p class="subtitle">The most important decision of the night. Choose wisely.</p>
+
+      <div class="food-grid">
+        <div class="food-card" onclick="selectFood(this, 'Italian')">
+          <span class="food-icon">🍝</span>
+          <span class="food-name">Italian</span>
+        </div>
+        <div class="food-card selected" onclick="selectFood(this, 'Sushi')">
+          <span class="food-icon">🍣</span>
+          <span class="food-name">Sushi</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Pizza')">
+          <span class="food-icon">🍕</span>
+          <span class="food-name">Pizza</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Tacos')">
+          <span class="food-icon">🌮</span>
+          <span class="food-name">Tacos</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Burgers')">
+          <span class="food-icon">🍔</span>
+          <span class="food-name">Burgers</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Ramen')">
+          <span class="food-icon">🍜</span>
+          <span class="food-name">Ramen</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Brunch')">
+          <span class="food-icon">🥞</span>
+          <span class="food-name">Brunch</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Dessert First')">
+          <span class="food-icon">🍰</span>
+          <span class="food-name">Dessert First</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'You Pick')">
+          <span class="food-icon">💖</span>
+          <span class="food-name">You Pick</span>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button class="btn-back" onclick="goToStep(1)">&larr; Back</button>
+        <button class="btn-primary" style="flex: 1;" onclick="finishDate()">It's a date 💕</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Final Confirmation -->
+    <div id="step-3" class="hidden">
+      <h1>✨ It's a date! 🌹</h1>
+
+      <div class="final-details">
+        <div class="detail-row">
+          <span class="detail-label">📅 Date</span>
+          <span class="detail-value" id="final-date">Wednesday 29 July</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">⏰ Time</span>
+          <span class="detail-value" id="final-time">2:00 PM</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">📍 Plan</span>
+          <span class="detail-value" id="final-plan">Dinner & a Movie</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">✂️ Food</span>
+          <span class="detail-value" id="final-food">Sushi 🍣</span>
+        </div>
+      </div>
+
+      <p class="subtitle" style="text-align: center; margin-bottom: 16px;">I'll pick you up then 😉<br><small>Can't wait
+          to see you ❤️</small></p>
+
+      <!-- Dog Meme Container -->
+      <div class="meme-container">
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80"
+          alt="Funny dog staring waiting" class="dog-meme" width="200" loading="lazy">
+      </div>
+
+      <!-- Change Plan Button -->
+      <div style="margin-top: 16px;">
+        <button class="btn-change-plan" onclick="goToStep(1)">✏️ Change Plan</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
