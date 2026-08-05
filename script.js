@@ -164,3 +164,42 @@ function finishDate() {
         });
     }
 }
+
+// ==========================
+// Floating Hearts Background
+// ==========================
+function spawnHeart() {
+    const container = document.getElementById("floating-hearts");
+    if (!container) return;
+
+    const heart = document.createElement("span");
+    heart.classList.add("heart");
+    heart.innerHTML = Math.random() > 0.5 ? "♥" : "❤";
+
+    const size = 14 + Math.random() * 18; // 14px - 32px
+    const left = Math.random() * 100; // vw
+    const duration = 6 + Math.random() * 6; // 6s - 12s
+    const drift = (Math.random() * 80 - 40) + "px"; // sideways drift
+
+    heart.style.left = left + "vw";
+    heart.style.fontSize = size + "px";
+    heart.style.animationDuration = duration + "s";
+    heart.style.setProperty("--drift", drift);
+
+    container.appendChild(heart);
+
+    // Clean up after animation finishes
+    setTimeout(() => {
+        heart.remove();
+    }, duration * 1000);
+}
+
+// Spawn a new heart at intervals
+setInterval(spawnHeart, 500);
+
+// Spawn a few immediately on load so it's not empty at first
+document.addEventListener("DOMContentLoaded", () => {
+    for (let i = 0; i < 6; i++) {
+        setTimeout(spawnHeart, i * 300);
+    }
+});
